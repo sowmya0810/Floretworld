@@ -1,0 +1,255 @@
+Index
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DocumentFloret World | Ecommerce Website Design</title>
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body>
+
+  <div class="header">
+    <div class="container">
+        <div class="navbar">
+            <div class="logo">
+                <img src="products/logo.webp" width="125px">
+            </div>
+            <nav>
+                <ul id="MenuItems">
+                    <li><a href="">Home</a></li>
+                    <li><a href="">Products</a></li>
+                    <li><a href="">About</a></li>
+                    <li><a href="">Contact</a></li>
+                    <li><a href="">Account</a></li>
+                </ul>
+            </nav>
+            <img src="products/cart.webp" width="30px" height="30px">
+            <img src="products/menu.webp" class="menu-icon" onclick="menutoggle()">
+        </div>
+        <div class="row">
+            <div class="col-2">
+           <h1>Blooming Deals, Endless Choices!</h1>
+           <p>In a world full of choices, let your shopping bloom with Floret World!</p>
+           <a href="" class="btn">Explore Now &#9758;</a>
+
+            </div>
+            <div class="col-2">
+<img src="products/bg.webp">
+            </div>
+        </div>
+    </div>
+</div> 
+
+<!------------- New Arrivals ------------->
+
+<div class="Categories">
+    <div class="small-container">
+        <h2 class="title">Categories</h2> 
+        <div class="row">
+            <div class="col-3">
+                <img src="products/combos/combos.jpg">
+            </div>
+            <div class="col-3">
+                <img src="products/bouquet/bouquet5.jpg">
+            </div>
+            <div class="col-3">
+                <img src="products/chocolate bouquet/CB2.jpg">
+            </div>
+    </div>
+    
+        
+    </div>
+</div>
+
+<!------------- New Arrivals ------------->
+<div class="small-container">
+    <h2 class="title">New Arrivals</h2>
+    <div class="row">
+        <div class="col-4">
+            <img src="products/combos/combo5.jpg">
+            <h4>Red rose bouquet with Red velvet cheese cake 500 grms</h4>
+            <div class="rating">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i> 
+                <i class="far fa-star"></i> 
+            </div>
+            <p>₹1,060</p>
+        </div>
+        <div class="col-4">
+            <img src="products/bouquet/bouquet6.jpg">
+            <h4>Sunshine Bliss Bouquet</h4>
+            <div class="rating">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+            </div>
+            <p>₹550</p>
+        </div>
+        <div class="col-4">
+            <img src="products/single/SINGLE2.jpg">
+            <h4>Crimson Charm Black Rose</h4>
+            <div class="rating">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="far fa-star"></i> 
+
+            </div>
+            <p>₹180</p>
+        </div>
+        <div class="col-4">
+            <img src="products/chocolate bouquet/CB5.jpg">
+            <h4>Chocolate Fantasy Bouquet</h4>
+            <div class="rating">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="far fa-star"></i>
+            </div>
+            <p>₹400</p>
+        </div>
+
+    </div>
+</div>
+<!------------- Offer ------------->
+<div class="offer">
+    <div class="small-container">
+        <div class="row">
+            <div class="col-2">
+                <img src="products/bouquet/bouquet7.jpg" class="offer-img">
+            </div>
+            <div class="col-2">
+                <p>Exclusively available on Floret World</p>
+                <h1>Tulip Serenity</h1>
+                <small>A graceful blend of soft pink and white tulips, symbolizing love, peace, and new beginnings.</small>
+           <a href="" class="btn">Buy Now &#9758;</a>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<!------------- Testimonials ------------->
+<div class="testimonials">
+    <div class="small-containers">
+        <div class="row">
+            <div class="col-3">
+                <i class="fas fa-quote-left"></i>
+                <p>A bouquet that embodies grace, elegance, and peace, Tulip Serenity is a breathtaking arrangement of soft pink and white tulips, delicately wrapped in pastel tones.</p>
+                <div class="rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="far fa-star"></i>
+                    </div>
+                    <img src="products/Siri.webp">
+                    <h3>Siri</h3>
+            </div>
+            <div class="col-3">
+                <i class="fas fa-quote-left"></i>
+                <p>The Tulip Serenity bouquet was even more beautiful in person! The soft pink and white tulips were fresh and elegant. My friend loved it!</p>
+                <div class="rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="far fa-star"></i>
+                    </div>
+                    <img src="products/Arohi.webp">
+                    <h3>Arohi</h3>
+            </div>
+            <div class="col-3">
+                <i class="fas fa-quote-left"></i>
+                <p>I ordered this for a wedding gift, and the couple loved it. The tulips were arranged beautifully, and the quality was top-notch!</p>
+                <div class="rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i> 
+                    </div>
+                    <img src="products/Ravi.webp">
+                    <h3>Ravi</h3>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!------------- Footer ------------->
+
+<div class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="footer-col-1">
+                <h3>Download our App</h3>
+                <p>Download App for Android and ios mobile phone.</p>
+                <div class="app-logo">
+                    <img src="products/play-store.png">
+                    <img src="products/app-store.png">
+                </div>
+                </div>
+                <div class="footer-col-2">
+                    <img src="products/websitelogo.webp">
+                    <p>Our Purpose is to Sustainably Make the Pleasure and Benefits of Flowers Accessible to All.</p>
+                </div>
+                    <div class="footer-col-3">
+                        <h3>Useful links</h3>
+                        <ul>
+                            <li>Coupons</li>
+                            <li>Blog Post</li>
+                            <li>Return Policy</li>
+                            <li>Join Affiliate</li>
+                        </ul>
+                 </div>
+                 <div class="footer-col-4">
+                    <h3>Follow Us On</h3>
+                    <ul>
+                        <li>Facebook</li>
+                        <li>Twitter</li>
+                        <li>Instagram</li>
+                        <li>YouTube</li>
+                    </ul>
+             </div>
+        </div>
+        <hr>
+        <p class="Copyright">Copyright 2025 - Easy Tutorials</p>
+    </div>
+</div>
+
+<!------------- JS for Toggle Menu ------------->
+<script>
+    var MenuItems = document.getElementById("MenuItems");
+
+    MenuItems.style.maxHeight = "0px";
+
+    function menutoggle(){
+        if(MenuItems.style.maxHeight == "0px")
+        {
+            MenuItems.style.maxHeight = "200px";
+        }
+        else
+        {
+            MenuItems.style.maxHeight = "0px";
+        }
+    }
+    </script>
+
+    
+</body>
+</html>
