@@ -1,57 +1,68 @@
-/* Login Page Styling */
+.nav-icons {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.menu-icon {
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+}
+
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background: #f7f8fa;
     margin: 0;
     padding: 0;
-  }
-  
-  .login-container {
+}
+
+.login-container {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-  }
-  
-  .login-form {
+}
+
+.login-form {
     background: #ffffff;
     padding: 2.5rem 3rem;
     border-radius: 16px;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
     max-width: 400px;
     width: 100%;
-  }
-  
-  .login-form h2 {
+}
+
+.login-form h2 {
     margin-bottom: 10px;
     font-size: 26px;
     color: #222;
     text-align: center;
-  }
-  
-  .login-form p {
+}
+
+.login-form p {
     color: #666;
     margin-bottom: 1.5rem;
     text-align: center;
-  }
-  
-  .login-form label {
+}
+
+.login-form label {
     display: block;
     margin-bottom: 6px;
     font-weight: 600;
     color: #444;
-  }
-  
-  .login-form input {
+}
+
+.login-form input {
     width: 100%;
     padding: 12px 14px;
     margin-bottom: 1.2rem;
     border: 1px solid #ccc;
     border-radius: 8px;
     font-size: 15px;
-  }
-  
-  .btn-login {
+}
+
+.btn-login {
     width: 100%;
     padding: 12px;
     background: #008060;
@@ -61,51 +72,52 @@ body {
     font-size: 16px;
     cursor: pointer;
     transition: background 0.3s ease;
-  }
-  
-  .btn-login:hover {
+}
+
+.btn-login:hover {
     background: #006b4d;
-  }
-  
-  .login-footer {
+}
+
+.login-footer {
     text-align: center;
     margin-top: 1.5rem;
-  }
-  
-  .login-footer a {
+}
+
+.login-footer a {
     color: #008060;
     text-decoration: none;
     font-weight: 500;
-  }
-  
-  .login-footer a:hover {
+}
+
+.login-footer a:hover {
     text-decoration: underline;
-  }
-  
-  /* Flash messages */
-  .flash-messages {
+}
+
+/* Flash messages */
+.flash-messages {
     margin-bottom: 1rem;
-  }
-  
-  .flash {
+}
+
+.flash {
     padding: 10px;
     margin-bottom: 10px;
     border-radius: 6px;
     font-size: 14px;
-  }
-  
-  .flash.success {
+}
+
+.flash.success {
     background-color: #e6f9f0;
     color: #237e50;
     border: 1px solid #b6f0d0;
-  }
-  
-  .flash.danger {
+}
+
+.flash.danger {
     background-color: #ffeaea;
     color: #c0392b;
     border: 1px solid #f5c6cb;
-  }
-  * {
+}
+
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -284,24 +296,26 @@ small {
 }
 
 .testimonials {
-    padding-top: 100px;
+    padding: 100px 0;
+    background: #f9f9f9;
+}
+
+.testimonials .row {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
 }
 
 .testimonials .col-3 {
+    flex: 1;
+    max-width: 30%;
     text-align: center;
-    padding: 40px 20px;
-    box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.1);
-    cursor: pointer;
-    transition: transform 0.5s;
+    padding: 30px 20px;
     background: #fff;
-    margin: 15px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
     border-radius: 10px;
-}
-
-.testimonials .col-3 img {
-    width: 50px;
-    margin-top: 20px;
-    border-radius: 50%;
+    transition: transform 0.3s;
 }
 
 .testimonials .col-3:hover {
@@ -417,12 +431,50 @@ ul {
         margin-bottom: 10px;
     }
 
-    nav ul li a {
-        color: #fff;
+    nav ul li a.active {
+        color: #ff523b;
+        font-weight: bold;
     }
 
     .menu-icon {
         display: block;
         cursor: pointer;
     }
+}
+img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+}
+.cart-icon {
+    position: relative;
+    display: inline-block;
+}
+
+#cart-count {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    padding: 3px 7px;
+    font-size: 12px;
+}
+.cart-icon {
+    position: relative;
+    display: inline-block;
+}
+
+.cart-count {
+    position: absolute;
+    top: -8px;
+    right: -10px;
+    background: red;
+    color: white;
+    font-size: 12px;
+    padding: 2px 6px;
+    border-radius: 50%;
 }

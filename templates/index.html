@@ -1,15 +1,12 @@
-Index
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DocumentFloret World | Ecommerce Website Design</title>
-    
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 
+    
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
@@ -20,20 +17,31 @@ Index
     <div class="container">
         <div class="navbar">
             <div class="logo">
-                <img src="products/logo.webp" width="125px">
+                <img src="{{ url_for('static', filename='products/websitelogo.webp') }}" width="125px">
             </div>
             <nav>
                 <ul id="MenuItems">
-                    <li><a href="">Home</a></li>
-                    <li><a href="">Products</a></li>
-                    <li><a href="">About</a></li>
-                    <li><a href="">Contact</a></li>
-                    <li><a href="">Account</a></li>
+                    <li><a href="/" class="active">Home</a></li>
+
+                    <li><a href="{{ url_for('products') }}">Products</a></li>
+                    <li><a href="{{ url_for('about') }}">About</a></li>
+                    <li><a href="{{ url_for('contact') }}">Contact</a></li>
+                    <li><a href="{{ url_for('account') }}">Account</a></li>
+
                 </ul>
             </nav>
-            <img src="products/cart.webp" width="30px" height="30px">
-            <img src="products/menu.webp" class="menu-icon" onclick="menutoggle()">
+             <div class="nav-icons">
+                <a href="{{ url_for('cart') }}" class="cart-icon">
+                    <img src="{{ url_for('static', filename='images/cart.png') }}" width="30" />
+                    <span id="cart-count">{{ session['cart_count'] if session.get('cart_count') else 0 }}</span>
+                </a>
+                
+        <img src="{{ url_for('static', filename='products/menu.webp') }}" class="menu-icon" onclick="menutoggle()" width="30px" height="30px" />
+    </div>
+            
+            
         </div>
+        
         <div class="row">
             <div class="col-2">
            <h1>Blooming Deals, Endless Choices!</h1>
@@ -42,30 +50,28 @@ Index
 
             </div>
             <div class="col-2">
-<img src="products/bg.webp">
+                <img src="{{ url_for('static', filename='products/bg.webp') }}">  
             </div>
         </div>
     </div>
 </div> 
 
-<!------------- New Arrivals ------------->
+<!------------- New Categories ------------->
 
 <div class="Categories">
     <div class="small-container">
         <h2 class="title">Categories</h2> 
         <div class="row">
             <div class="col-3">
-                <img src="products/combos/combos.jpg">
+                <img src="{{ url_for('static', filename='products/combos/combos.jpg') }}">
             </div>
             <div class="col-3">
-                <img src="products/bouquet/bouquet5.jpg">
+                <img src="{{ url_for('static', filename='products/bouquet/bouquet5.jpg') }}">
             </div>
             <div class="col-3">
-                <img src="products/chocolate bouquet/CB2.jpg">
+                <img src="{{ url_for('static', filename='products/chocolate bouquet/CB2.jpg') }}">
             </div>
-    </div>
-    
-        
+        </div>
     </div>
 </div>
 
@@ -74,8 +80,8 @@ Index
     <h2 class="title">New Arrivals</h2>
     <div class="row">
         <div class="col-4">
-            <img src="products/combos/combo5.jpg">
-            <h4>Red rose bouquet with Red velvet cheese cake 500 grms</h4>
+            <img src="{{ url_for('static', filename='products/combos/combo5.jpg') }}">
+            <h4>Velvet Roses & Cocoa Dreams</h4>
             <div class="rating">
                 <i class="fas fa-star"></i>
                 <i class="fas fa-star"></i>
@@ -84,9 +90,23 @@ Index
                 <i class="far fa-star"></i> 
             </div>
             <p>₹1,060</p>
+            <form action="{{ url_for('add_to_cart', product_name='Velvet Roses & Cocoa Dreams') }}" method="POST" class="cart-form">
+                <div class="quantity-selector">
+                    <button type="button" class="qty-btn" onclick="changeQty(this, -1)">-</button>
+                    <input type="number" name="quantity" value="1" min="1" class="qty-input" readonly>
+                    <button type="button" class="qty-btn" onclick="changeQty(this, 1)">+</button>
+                </div>
+                <button type="submit" class="btn">Add to Cart</button>
+            </form>
+            
+            <form action="{{ url_for('buy_now', product_name='Velvet Roses & Cocoa Dreams') }}" method="POST">
+                <button type="submit" class="btn" style="margin-top: 10px;">Buy Now</button>
+            </form>
+
+
         </div>
         <div class="col-4">
-            <img src="products/bouquet/bouquet6.jpg">
+            <img src="{{ url_for('static', filename='products/bouquet/bouquet6.jpg') }}">
             <h4>Sunshine Bliss Bouquet</h4>
             <div class="rating">
                 <i class="fas fa-star"></i>
@@ -96,9 +116,23 @@ Index
                 <i class="fas fa-star"></i>
             </div>
             <p>₹550</p>
+            <form action="{{ url_for('add_to_cart', product_name='Sunshine Bliss Bouquet') }}" method="POST" class="cart-form">
+                <div class="quantity-selector">
+                    <button type="button" class="qty-btn" onclick="changeQty(this, -1)">-</button>
+                    <input type="number" name="quantity" value="1" min="1" class="qty-input" readonly>
+                    <button type="button" class="qty-btn" onclick="changeQty(this, 1)">+</button>
+                </div>
+                <button type="submit" class="btn">Add to Cart</button>
+            </form>
+            
+            <form action="{{ url_for('buy_now', product_name='Sunshine Bliss Bouquet') }}" method="POST">
+                <button type="submit" class="btn" style="margin-top: 10px;">Buy Now</button>
+            </form>
+
+
         </div>
         <div class="col-4">
-            <img src="products/single/SINGLE2.jpg">
+            <img src="{{ url_for('static', filename='products/single/SINGLE2.jpg') }}">
             <h4>Crimson Charm Black Rose</h4>
             <div class="rating">
                 <i class="fas fa-star"></i>
@@ -106,12 +140,25 @@ Index
                 <i class="fas fa-star"></i>
                 <i class="fas fa-star"></i>
                 <i class="far fa-star"></i> 
-
             </div>
             <p>₹180</p>
+            <form action="{{ url_for('add_to_cart', product_name='Crimson Charm Black Rose') }}" method="POST" class="cart-form">
+                <div class="quantity-selector">
+                    <button type="button" class="qty-btn" onclick="changeQty(this, -1)">-</button>
+                    <input type="number" name="quantity" value="1" min="1" class="qty-input" readonly>
+                    <button type="button" class="qty-btn" onclick="changeQty(this, 1)">+</button>
+                </div>
+                <button type="submit" class="btn">Add to Cart</button>
+            </form>
+            
+            <form action="{{ url_for('buy_now', product_name='Crimson Charm Black Rose') }}" method="POST">
+                <button type="submit" class="btn" style="margin-top: 10px;">Buy Now</button>
+            </form>
+
+
         </div>
         <div class="col-4">
-            <img src="products/chocolate bouquet/CB5.jpg">
+            <img src="{{ url_for('static', filename='products/chocolate bouquet/CB5.jpg') }}">
             <h4>Chocolate Fantasy Bouquet</h4>
             <div class="rating">
                 <i class="fas fa-star"></i>
@@ -121,75 +168,23 @@ Index
                 <i class="far fa-star"></i>
             </div>
             <p>₹400</p>
-        </div>
+            <form action="{{ url_for('add_to_cart', product_name='Chocolate Fantasy Bouquet') }}" method="POST" class="cart-form">
+                <div class="quantity-selector">
+                    <button type="button" class="qty-btn" onclick="changeQty(this, -1)">-</button>
+                    <input type="number" name="quantity" value="1" min="1" class="qty-input" readonly>
+                    <button type="button" class="qty-btn" onclick="changeQty(this, 1)">+</button>
+                </div>
+                <button type="submit" class="btn">Add to Cart</button>
+            </form>
+            
+            <form action="{{ url_for('buy_now', product_name='Chocolate Fantasy Bouquet') }}" method="POST">
+                <button type="submit" class="btn" style="margin-top: 10px;">Buy Now</button>
+            </form>
 
-    </div>
-</div>
-<!------------- Offer ------------->
-<div class="offer">
-    <div class="small-container">
-        <div class="row">
-            <div class="col-2">
-                <img src="products/bouquet/bouquet7.jpg" class="offer-img">
-            </div>
-            <div class="col-2">
-                <p>Exclusively available on Floret World</p>
-                <h1>Tulip Serenity</h1>
-                <small>A graceful blend of soft pink and white tulips, symbolizing love, peace, and new beginnings.</small>
-           <a href="" class="btn">Buy Now &#9758;</a>
-            </div>
+
 
         </div>
     </div>
-</div>
-
-
-<!------------- Testimonials ------------->
-<div class="testimonials">
-    <div class="small-containers">
-        <div class="row">
-            <div class="col-3">
-                <i class="fas fa-quote-left"></i>
-                <p>A bouquet that embodies grace, elegance, and peace, Tulip Serenity is a breathtaking arrangement of soft pink and white tulips, delicately wrapped in pastel tones.</p>
-                <div class="rating">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="far fa-star"></i>
-                    </div>
-                    <img src="products/Siri.webp">
-                    <h3>Siri</h3>
-            </div>
-            <div class="col-3">
-                <i class="fas fa-quote-left"></i>
-                <p>The Tulip Serenity bouquet was even more beautiful in person! The soft pink and white tulips were fresh and elegant. My friend loved it!</p>
-                <div class="rating">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="far fa-star"></i>
-                    </div>
-                    <img src="products/Arohi.webp">
-                    <h3>Arohi</h3>
-            </div>
-            <div class="col-3">
-                <i class="fas fa-quote-left"></i>
-                <p>I ordered this for a wedding gift, and the couple loved it. The tulips were arranged beautifully, and the quality was top-notch!</p>
-                <div class="rating">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star-half-alt"></i> 
-                    </div>
-                    <img src="products/Ravi.webp">
-                    <h3>Ravi</h3>
-            </div>
-        </div>
-    </div>
-
 </div>
 <!------------- Footer ------------->
 
@@ -200,12 +195,12 @@ Index
                 <h3>Download our App</h3>
                 <p>Download App for Android and ios mobile phone.</p>
                 <div class="app-logo">
-                    <img src="products/play-store.png">
-                    <img src="products/app-store.png">
+                    <img src="{{ url_for('static', filename='products/play-store.png') }}">
+                    <img src="{{ url_for('static', filename='products/app-store.png') }}">
                 </div>
                 </div>
                 <div class="footer-col-2">
-                    <img src="products/websitelogo.webp">
+                    <img src="{{ url_for('static', filename='products/websitelogo.webp') }}">
                     <p>Our Purpose is to Sustainably Make the Pleasure and Benefits of Flowers Accessible to All.</p>
                 </div>
                     <div class="footer-col-3">
@@ -250,6 +245,43 @@ Index
     }
     </script>
 
+<script>
+    function changeQty(button, delta) {
+        const input = button.parentElement.querySelector(".qty-input");
+        let qty = parseInt(input.value);
+        qty = isNaN(qty) ? 1 : qty + delta;
+        if (qty < 1) qty = 1;
+        input.value = qty;
+    }
+    </script>
     
+    <style>
+    .quantity-selector {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        margin-bottom: 10px;
+    }
+    
+    .qty-btn {
+        padding: 5px 10px;
+        font-size: 16px;
+        background-color: #ad6980;
+        color: white;
+        border: none;
+        cursor: pointer;
+        border-radius: 4px;
+    }
+    
+    .qty-input {
+        width: 50px;
+        text-align: center;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        padding: 4px;
+    }
+    </style>
+
 </body>
 </html>
