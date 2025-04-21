@@ -15,13 +15,16 @@ cursor.execute('''
     )
 ''')
 
-# Insert a test user
-username = "sowmya"
-mailID = "sowmya@gmail.com"
-password = generate_password_hash("123")
+# Insert multiple test users
+users = [
+    ("sowmya", "sowmya@gmail.com", generate_password_hash("123")),
+    ("priya", "priya10@gamil.com", generate_password_hash("priya")),
+    ("harshu", "harshu30@gamil.com", generate_password_hash("harshu")),
+    ("hari", "harish22@example.com", generate_password_hash("hari"))
+]
 
-cursor.execute("INSERT INTO users (username, mailID, password) VALUES (?, ?, ?)", (username, mailID, password))
+cursor.executemany("INSERT INTO users (username, mailID, password) VALUES (?, ?, ?)", users)
 
 conn.commit()
-print("✅ Table created and test user inserted.")
+print("Table created and multiple test users inserted.")
 conn.close()

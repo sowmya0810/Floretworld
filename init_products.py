@@ -19,10 +19,11 @@ cursor.execute('''
 
 
 products = [
-    ("KitKat and DairyMilk Bouquet", "Choco Blossom Delight Bouquet", 400, "CB3.jpg"),
-    ("Sun Flower Bouquet", "Sunflower Serenity.", 550, "bouquet1.jpg"),
-    ("RedVelvet cake with Red roses", "Velvet Roses & Cocoa Dreams", 1060, "combo5.jpg")
+    ("Choco Blossom Delight Bouquet", "KitKat and DairyMilk Bouquet", 400, "CB3.jpg"),
+    ("SunFlower Serenity", "Sunflower Bouquet", 550, "bouquet1.jpg"),
+    ("Velvet Roses & Cocoa Dreams", "RedVelvet cake with Red roses", 1060, "combo5.jpg")
 ]
+
 
 cursor.executemany('INSERT INTO products (name, description, price, image) VALUES (?, ?, ?, ?)', products)
 

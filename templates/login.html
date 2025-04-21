@@ -3,40 +3,56 @@
 <head>
     <title>Login | Floret</title>
     <style>
-        body { font-family: Arial; background: #f9f9f9; padding: 50px; }
+        body {
+            font-family: Arial, sans-serif;
+            background: url("{{ url_for('static', filename='products/bg.webp') }}") no-repeat center center fixed;
+            background-size: cover;
+            padding: 50px;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
         .form-box {
             max-width: 400px;
             margin: auto;
             padding: 20px;
-            background: white;
+            background: hwb(319 29% 11% / 0.85);
             border-radius: 10px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
+
         input {
             width: 100%;
             padding: 10px;
             margin: 10px 0;
-            border: 1px solid #ccc;
+            border: 1px solid hwb(0 7% 90%);
             border-radius: 5px;
         }
+
         button {
             padding: 10px;
-            background: #007bff;
+            background: rgb(204, 138, 186);
             color: white;
             border: none;
             width: 100%;
             border-radius: 5px;
             cursor: pointer;
         }
+
         button:hover {
-            background: #0056b3;
+            background: hsl(128, 50%, 74%);
         }
+
         .alert {
             padding: 10px;
             border-radius: 5px;
             margin-bottom: 15px;
             text-align: center;
         }
+
         .alert.success { background-color: #d4edda; color: #155724; }
         .alert.danger { background-color: #f8d7da; color: #721c24; }
         .alert.warning { background-color: #fff3cd; color: #856404; }
@@ -58,15 +74,18 @@
             {% endif %}
         {% endwith %}
 
-        <!-- Login form -->
-        <form action="{{ url_for('login') }}" method="POST">
-            <input type="email" name="mailID" placeholder="Enter your email" required>
-            <input type="password" name="password" placeholder="Enter your password" required>
+        <form method="POST" action="{{ url_for('login') }}">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+            <label for="mailID">Email:</label><br>
+            <input type="email" id="mailID" name="mailID" placeholder="Enter your email" required><br><br>
+
+            <label for="password">Password:</label><br>
+            <input type="password" id="password" name="password" placeholder="Enter your password" required><br><br>
+
             <button type="submit">Login</button>
         </form>
-        
-          
-        
+
         <p style="text-align:center; margin-top:15px;">
             Don't have an account? <a href="{{ url_for('register') }}">Register here</a>.
         </p>

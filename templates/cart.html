@@ -2,33 +2,205 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Your Cart - Floret</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Cart - Floret | Ecommerce Website Design</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
-    <h1>Your Shopping Cart</h1>
+    <!-- Navbar -->
+    <div class="container">
+        <div class="navbar">
+            <div class="logo">
+                <a href="{{ url_for('index') }}">
+                    <img src="{{ url_for('static', filename='products/websitelogo.webp') }}" width="125px">
+                </a>
+            </div>
+            <nav>
+                <ul id="MenuItems">
+                    <li><a href="{{ url_for('index') }}">Home</a></li>
+                    <li><a href="{{ url_for('products') }}">Products</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="{{ url_for('account') }}">Account</a></li>
+                </ul>
+            </nav>
+            <a href="{{ url_for('cart') }}" class="cart-icon">
+                <img src="{{ url_for('static', filename='images/cart.png') }}" width="30px" height="30px">
+                {% if cart_item_count > 0 %}
+                    <span class="cart-count">{{ cart_item_count }}</span>
+                {% endif %}
+            </a>
+        </div>
+    </div>
 
-    {% if cart %}
+    <!-- Cart Items -->
+    <div class="small-container cart-page">
+        {% if cart %}
         <table>
-            <thead>
-                <tr>
-                    <th>Product</th>
-                    <th>Quantity</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for product, quantity in cart.items() %}
-                    <tr>
-                        <td>{{ product }}</td>
-                        <td>{{ quantity }}</td>
-                    </tr>
-                {% endfor %}
-            </tbody>
+            <tr>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Price</th>
+            </tr>
+            {% for item in cart %}
+            <tr id="item-{{ item.name }}" data-price="{{ item.price }}">
+                <td>
+                    <div class="cart-info">
+                        <img src="{{ url_for('static', filename=item.image) }}">
+                        <div>
+                            <p>{{ item.name }}</p>
+                            <small>Price: ₹{{ item.price }}</small><br>
+                            <a href="javascript:void(0);" onclick="removeProduct('{{ item.name }}')">Remove</a>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div class="quantity-controls">
+                        <button onclick="updateCart('{{ item.name }}', -1)">-</button>
+                        <input type="number" id="qty-{{ item.name }}" value="1" min="0" readonly>
+                        <button onclick="updateCart('{{ item.name }}', 1)">+</button>
+                    </div>
+                </td>
+                <td id="subtotal-{{ item.name }}">₹{{ item.price }}</td>
+            </tr>
+            {% endfor %}
         </table>
-    {% else %}
-        <p>Your cart is empty.</p>
-    {% endif %}
+    
+        <!-- Price Summary -->
+        <div class="total-price">
+            <table>
+                <tr>
+                    <td>Price</td>
+                    <td id="cart-subtotal">₹{{ total_price }}</td>
+                </tr>
+                <tr>
+                    <td colspan="2"><hr></td>
+                </tr>
+                <tr>
+                    <td>Total</td>
+                    <td id="cart-total">₹{{ total_price }}</td>
+                </tr>
+            </table>
+        </div>
+    
+        <div class="total-price">
+            <a href="{{ url_for('checkout') }}" class="btn">Proceed to checkout</a>
+        </div>
+        {% else %}
+        <p>Your cart is empty!</p>
+        {% endif %}
+    </div>
+    
 
-    <a href="{{ url_for('products') }}">← Continue Shopping</a>
+    <!-- Footer -->
+    <div class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="footer-col1">
+                    <h3>Download Our App</h3>
+                    <p>Download App for Android and iOS mobile phone.</p>
+                    <div class="app-logo">
+                        <img src="{{ url_for('static', filename='products/play-store.png') }}">
+                        <img src="{{ url_for('static', filename='products/app-store.png') }}">
+                    </div>
+                </div>
+                <div class="footer-col3">
+                    <h3>Useful Links</h3>
+                    <ul>
+                        <li>Coupons</li>
+                        <li>Blog Post</li>
+                        <li>Return Policy</li>
+                        <li>Join Affiliate</li>
+                    </ul>
+                </div>
+                <div class="footer-col4">
+                    <h3>Follow Us</h3>
+                    <ul>
+                        <li>Facebook</li>
+                        <li>Twitter</li>
+                        <li>Instagram</li>
+                        <li>YouTube</li>
+                    </ul>
+                </div>
+            </div>
+            <hr>
+            <p class="copyright">
+                <a href="https://www.youtube.com/c/EasyTutorialsVideo?sub_confirmation=1">
+                    Copyright 2020 - Easy Tutorials
+                </a>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        var MenuItems = document.getElementById("MenuItems");
+        MenuItems.style.maxHeight = "0px";
+
+        function menutoggle() {
+            MenuItems.style.maxHeight = MenuItems.style.maxHeight === "0px" ? "100px" : "0px";
+        }
+
+        function formatCurrency(amount) {
+            return new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(amount);
+        }
+
+        // Update the cart when a product is added
+        function updateCart(productName, quantity) {
+            fetch('/update_cart', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    product_name: productName,
+                    quantity: quantity
+                })
+            })
+            .catch(error => console.error('Error updating cart:', error));
+        }
+
+        // Recalculate the cart total after updates
+        function recalculateCartTotal() {
+            let total = 0;
+
+            // Loop through cart items and calculate the total price
+            const cartItems = JSON.parse('{{ cart | tojson | safe }}');
+            cartItems.forEach(item => {
+                const row = document.getElementById('item-' + item.name);
+                if (row) {
+                    const price = parseFloat(row.getAttribute('data-price'));
+                    const quantity = parseInt(document.getElementById('qty-' + item.name).value);
+                    total += price * quantity;
+                }
+            });
+
+            document.getElementById('cart-subtotal').innerText = formatCurrency(total);
+            document.getElementById('cart-total').innerText = formatCurrency(total);
+        }
+
+        // Remove a product from the cart
+        function removeProduct(productName) {
+            fetch('/remove_from_cart', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ product_name: productName })
+            })
+            .then(response => response.json())
+            .then(data => {
+                const itemRow = document.getElementById('item-' + productName);
+                if (itemRow) itemRow.remove();
+                recalculateCartTotal();
+
+                if (document.querySelectorAll('.cart-page table tr').length <= 1) {
+                    document.querySelector('.cart-page').innerHTML = "<p>Your cart is empty!</p>";
+                }
+            })
+            .catch(error => console.error('Error removing product:', error));
+        }
+    </script>
 </body>
 </html>

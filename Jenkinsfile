@@ -2,42 +2,52 @@ pipeline {
     agent any
 
     environment {
-        VENV = 'venv'
+        IMAGE_NAME = 'floret-app'
+        CONTAINER_NAME = 'Devopsecommerce-container'
+        PORT = '5000'
     }
 
     stages {
-        stage('Checkout Code') {
+        stage('Clone Repository') {
             steps {
-                git 'https://github.com/your-username/devopsecommerce.git'
+                echo 'Repository is automatically cloned by Jenkins (SCM configured)'
             }
         }
 
-        stage('Set up Python Env') {
+        stage('Build Docker Image') {
             steps {
-                sh '''
-                    python3 -m venv $VENV
-                    source $VENV/bin/activate
-                    pip install --upgrade pip
-                    pip install -r requirements.txt
-                '''
+                sh 'docker build -t $IMAGE_NAME .'
             }
         }
 
-        stage('Run Flask App') {
+        stage('Stop Old Container') {
             steps {
-                sh '''
-                    source $VENV/bin/activate
-                    export FLASK_APP=app.py
-                    export FLASK_ENV=development
-                    nohup flask run --host=0.0.0.0 --port=5000 &
-                '''
+                sh 'docker stop $CONTAINER_NAME || true'
+            }
+        }
+
+        stage('Remove Old Container') {
+            steps {
+                sh 'docker rm $CONTAINER_NAME || true'
+            }
+        }
+
+        stage('Run New Container') {
+            steps {
+                sh 'docker run -d -p $PORT:$PORT --name $CONTAINER_NAME $IMAGE_NAME'
+            }
+        }
+
+        stage('List Running Containers') {
+            steps {
+                sh 'docker ps'
             }
         }
     }
 
     post {
         always {
-            echo 'Pipeline Finished'
+            echo 'Pipeline run finished.'
         }
     }
 }
